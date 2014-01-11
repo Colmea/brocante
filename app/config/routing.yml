@@ -1,0 +1,4 @@
+brocante_brocante:
+    resource: "@BrocanteBrocanteBundle/Resources/config/routing.yml"
+    prefix:   /
+

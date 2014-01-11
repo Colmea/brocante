@@ -1,0 +1,7 @@
+parameters:
+#    brocante_brocante.example.class: Brocante\Bundle\BrocanteBundle\Example
+
+services:
+#    brocante_brocante.example:
+#        class: %brocante_brocante.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
