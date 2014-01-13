@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ecd96e9661727dcd8ee006973204309e",
+    "hash": "87477368018f6b72959678088c107057",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1378,17 +1378,17 @@
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "2.2.3",
+            "version": "dev-master",
             "target-dir": "Sonata/CoreBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "fadf268d4b2c23220b27c33389b6a6132085159e"
+                "reference": "0c72b6b0212014c5b5e015b4bf3811bf42fb3728"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/fadf268d4b2c23220b27c33389b6a6132085159e",
-                "reference": "fadf268d4b2c23220b27c33389b6a6132085159e",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/0c72b6b0212014c5b5e015b4bf3811bf42fb3728",
+                "reference": "0c72b6b0212014c5b5e015b4bf3811bf42fb3728",
                 "shasum": ""
             },
             "require": {
@@ -1432,7 +1432,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2014-01-07 11:35:59"
+            "time": "2014-01-09 14:35:33"
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
@@ -2089,6 +2089,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "sonata-project/core-bundle": 20,
         "sonata-project/admin-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20,
         "friendsofsymfony/user-bundle": 20

@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -67,3 +67,49 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# Sonata Admin Configuration
+sonata_admin:
+    title:      Administration Brocante
+    title_logo: http://www.scoutgouvy.be/imagesite/mouvement_rvb.jpg
+    dashboard:
+        blocks:
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+            -
+                position: right
+                type: sonata.block.service.text
+                settings:
+                    content: >
+                        <h2>Procédure des réservations</h2>
+                        <p>Vérifier les informations suivantes :<br>
+                        <ul>
+                        <li>Nom et prénom</li>
+                        <li>Adresse mail ou adresse privée</li>
+                        <li>Numéros de téléphone (facultatif)</li>
+                        <li>Nombre d’emplacements <strong>OU</strong> Emplacements voulus (facultatif)</li>
+                        </ul>
+                        Lors de l’encodage des emplacements si la personne veut des emplacements spécifiques il faut absolument les encodé dans le programme.<br>
+                        Si la personne ne veut pas d’emplacement spécifique mais veut être dans une certaines zone, il faut serrer le plus possible les emplacements.<br><br>
+                        Après avoir poussé sur le bouton "Créer", un mail est envoyé automatiquement à la personne avec toutes les informations relatives au payement.</p>
+        groups:
+            Brocante:
+                items:
+                    - sonata.admin.participant
+                    - sonata.admin.emplacement
+                    - sonata.admin.zone
+
+# Sonata Block Configuration
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+        sonata.admin_doctrine_orm.block.audit:
+            contexts:   [admin]
+
+        sonata.block.service.text:
+        sonata.block.service.rss:
+

@@ -2,6 +2,46 @@ parameters:
 #    brocante_brocante.example.class: Brocante\Bundle\BrocanteBundle\Example
 
 services:
-#    brocante_brocante.example:
-#        class: %brocante_brocante.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    sonata.admin.participant:
+        class: Brocante\Bundle\BrocanteBundle\Admin\ParticipantAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Brocante", label: "Participants" }
+        arguments:
+            - ~
+            - Brocante\Bundle\BrocanteBundle\Entity\Participant
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]
+
+    sonata.admin.emplacement:
+        class: Brocante\Bundle\BrocanteBundle\Admin\EmplacementAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Brocante", label: "Emplacements" }
+        arguments:
+            - ~
+            - Brocante\Bundle\BrocanteBundle\Entity\Emplacement
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]
+
+    sonata.admin.zone:
+        class: Brocante\Bundle\BrocanteBundle\Admin\ZoneAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Brocante", label: "Zones" }
+        arguments:
+            - ~
+            - Brocante\Bundle\BrocanteBundle\Entity\Zone
+            - ~
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]
+
+    sonata.admin.reservation:
+        class: Brocante\Bundle\BrocanteBundle\Admin\ReservationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Brocante", label: "Reservation" }
+        arguments:
+            - ~
+            - Brocante\Bundle\BrocanteBundle\Entity\Reservation
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AcmeDemoBundle]]
