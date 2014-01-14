@@ -28,7 +28,7 @@ class Reservation
     protected $participant;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Emplacement", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Emplacement", cascade={"all"}, mappedBy="reservation")
      */
     protected $emplacements;
 
@@ -171,6 +171,30 @@ class Reservation
         return $this->isWanted;
     }
 
+
+    /**
+     * Set nbEmplacements
+     *
+     * @param integer $nbEmplacements
+     * @return Reservation
+     */
+    public function setNbEmplacements($nbEmplacements)
+    {
+        $this->nbEmplacements = $nbEmplacements;
+
+        return $this;
+    }
+
+    /**
+     * Get nbEmplacements
+     *
+     * @return integer 
+     */
+    public function getNbEmplacements()
+    {
+        return $this->nbEmplacements;
+    }
+
     /**
      * Add emplacements
      *
@@ -202,28 +226,5 @@ class Reservation
     public function getEmplacements()
     {
         return $this->emplacements;
-    }
-
-    /**
-     * Set nbEmplacements
-     *
-     * @param integer $nbEmplacements
-     * @return Reservation
-     */
-    public function setNbEmplacements($nbEmplacements)
-    {
-        $this->nbEmplacements = $nbEmplacements;
-
-        return $this;
-    }
-
-    /**
-     * Get nbEmplacements
-     *
-     * @return integer 
-     */
-    public function getNbEmplacements()
-    {
-        return $this->nbEmplacements;
     }
 }

@@ -34,9 +34,10 @@ class EmplacementAdmin extends Admin
     {
         $listMapper
             ->add('zone')
-            ->add('numero')
+            ->addIdentifier('numero')
             ->add('remarque')
             ->add('surface')  
+            ->add('isFree', 'boolean', array('label' => 'Libre ?'))
 
         ;
     }

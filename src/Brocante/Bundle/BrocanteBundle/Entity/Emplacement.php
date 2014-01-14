@@ -22,6 +22,12 @@ class Emplacement
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Reservation", inversedBy="emplacements")
+     * @ORM\JoinColumn(name="reservation_id", referencedColumnName="id", nullable=true)
+     */
+    protected $reservation;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Zone", inversedBy="emplacements")
      * @ORM\JoinColumn(name="zone_id", referencedColumnName="id")
      */
@@ -51,7 +57,16 @@ class Emplacement
 
     public function __toString()
     {
-        return $this->getZone() . '-' . $this->getNumero();
+        return $this->getIdentifiant();
+    }
+
+    public function getIdentifiant()
+    {
+       $output = $this->getZone() . '-' . $this->getNumero();
+       if ( !$this->isFree() )
+        $output .= ' [RESERVE]';
+
+        return $output;
     }
     
     /**
@@ -154,5 +169,44 @@ class Emplacement
     public function getRemarque()
     {
         return $this->remarque;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Détermine si l'emplacement est toujours libre ou non
+     */
+    public function isFree()
+    {
+        return  ( is_null($this->reservation) );
+    }
+
+    /**
+     * Set reservation
+     *
+     * @param \Brocante\Bundle\BrocanteBundle\Entity\Reservation $reservation
+     * @return Emplacement
+     */
+    public function setReservation(\Brocante\Bundle\BrocanteBundle\Entity\Reservation $reservation = null)
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return \Brocante\Bundle\BrocanteBundle\Entity\Reservation 
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
     }
 }

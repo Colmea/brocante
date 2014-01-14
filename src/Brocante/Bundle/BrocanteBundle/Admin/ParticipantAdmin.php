@@ -40,7 +40,8 @@ class ParticipantAdmin extends Admin
             ->addIdentifier('prenom')
             ->add('nom')
             ->add('email')
-            ->add('reservation.nbEmplacements', null, array('label' => 'Emplacements'))
+            ->add('reservation.nbEmplacements', null, array('label' => 'Nbr emplacements'))
+            ->add('reservation.emplacements', null, array('label' => 'Emplacements choisis'))
             ->add('reservation.paye', null, array('label' => 'A payé ?'))
         ;
     }
@@ -49,6 +50,12 @@ class ParticipantAdmin extends Admin
     {
         $reservation = $participant->getReservation();
         $reservation->setParticipant( $participant );
+
+        $emplacements = $reservation->getEmplacements();
+        foreach ( $emplacements as $emplacement ) {
+            $emplacement->setReservation($reservation);
+            $reservation->addEmplacement($emplacement);
+        }
     }
 
     public function preUpdate($participant)
@@ -57,6 +64,12 @@ class ParticipantAdmin extends Admin
         $reservation->setParticipant( $participant );
 
         $participant->setReservation( $reservation );
+
+        $emplacements = $reservation->getEmplacements();
+        foreach ( $emplacements as $emplacement ) {
+            $emplacement->setReservation($reservation);
+            $reservation->addEmplacement($emplacement);
+        }
     }
  
 }
