@@ -2,6 +2,13 @@ parameters:
 #    brocante_brocante.example.class: Brocante\Bundle\BrocanteBundle\Example
 
 services:
+    # Listeners
+    reservation.sendmail.listener:
+        class: Brocante\Bundle\BrocanteBundle\Listener\ReservationSendMailListener
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+
+    # Admin services
     sonata.admin.participant:
         class: Brocante\Bundle\BrocanteBundle\Admin\ParticipantAdmin
         tags:
@@ -12,6 +19,9 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AcmeDemoBundle]]
+            - [ setMailer, [@mailer] ]
+            - [ setTemplate2, [@templating]]
+
 
     sonata.admin.emplacement:
         class: Brocante\Bundle\BrocanteBundle\Admin\EmplacementAdmin

@@ -8,6 +8,14 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class ParticipantAdmin extends Admin
 {
+    /**
+     * @var \Swift_Mailer
+     */
+    protected $mailer;
+
+    protected $template;
+
+
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -46,6 +54,16 @@ class ParticipantAdmin extends Admin
         ;
     }
 
+    public function setMailer(\Swift_Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
+    public function setTemplate2($templating)
+    {
+        $this->template = $templating;
+    }
+
     public function prePersist($participant)
     {
         $reservation = $participant->getReservation();
@@ -56,6 +74,28 @@ class ParticipantAdmin extends Admin
             $emplacement->setReservation($reservation);
             $reservation->addEmplacement($emplacement);
         }
+    }
+
+    public function postPersist($participant)
+    {
+        $reservation = $participant->getReservation();
+
+        echo $participant->getEmail();
+        
+
+        if ( !is_null($reservation) )
+        {
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Brocante Heusy: confirmation de réservation')
+                ->setFrom('brocante@heusy.org')
+                ->setTo( $participant->getEmail() )
+                ->setBody($this->template->renderResponse('BrocanteBrocanteBundle:Reservation:mail_confirmation.txt.twig', array('participant' => $participant) ))
+            ;
+            $this->mailer->send($message);
+        }
+
+
     }
 
     public function preUpdate($participant)
@@ -71,5 +111,6 @@ class ParticipantAdmin extends Admin
             $reservation->addEmplacement($emplacement);
         }
     }
- 
+
+
 }

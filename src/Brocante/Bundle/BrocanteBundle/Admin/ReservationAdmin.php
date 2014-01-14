@@ -29,17 +29,19 @@ class ReservationAdmin extends Admin
         $formMapper
             ->add('paye', null, array('required' => false, 'label' => 'A payé ?'))
             ->add('nbEmplacements', 'choice', array('choices' => $optionsNbEmplacements, 'required' => true, 'label' => "Nombre d'emplacements"))
-            ->add('emplacements', null, array(
-                /*'query_builder' => $query,*/
-                'label' => 'Emplacements (facultatif)',
-                'required' => false,
-                'help' => "(facultatif) A renseigner si le brocanteur veut un (ou plusieurs) emplacement(s) particulier(s)"
+            ->with('Emplacements')
+                ->add('emplacements', null, array(
+                    /*'query_builder' => $query,*/
+                    'label' => 'Emplacements',
+                    'required' => false,
+                    'help' => "(facultatif) A renseigner si le brocanteur veut un (ou plusieurs) emplacement(s) particulier(s)"
+                    )
                 )
-            )
-            ->add('isWanted', null, array(
-                'required' => false,
-                'label' => 'Emplacements voulus ?',
-                'help' => "Est-ce que la personne voulait ces emplacements ?"))
+                ->add('isWanted', null, array(
+                    'required' => false,
+                    'label' => 'Emplacements voulus?',
+                    'help' => "Est-ce que la personne voulait ces emplacements ?"))
+            ->end()
         ;
     }
 
