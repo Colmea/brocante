@@ -100,8 +100,6 @@ class ParticipantAdmin extends Admin
                 )))
             ;
 
-            echo $message->getBody();
-            exit();
             $this->mailer->send($message);
         }
 
