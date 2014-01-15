@@ -25,7 +25,7 @@ class ParticipantAdmin extends Admin
             ->add('email')
             ->add('telephone', null, array('required' => false))
             ->with('Reservation')
-                ->add('reservation', 'sonata_type_admin', array('delete' => false))
+                ->add('reservation', 'sonata_type_admin', array('delete' => true))
             ->end()
         ;
     }
@@ -87,11 +87,21 @@ class ParticipantAdmin extends Admin
         {
 
             $message = \Swift_Message::newInstance()
+                ->setContentType("text/html")
+                ->setCharset('utf-8')
                 ->setSubject('Brocante Heusy: confirmation de réservation')
                 ->setFrom('brocante@heusy.org')
                 ->setTo( $participant->getEmail() )
-                ->setBody($this->template->renderResponse('BrocanteBrocanteBundle:Reservation:mail_confirmation.txt.twig', array('participant' => $participant) ))
+
+                ->setBody($this->template->renderResponse('BrocanteBrocanteBundle:Reservation:mail_confirmation.html.twig', array(
+                    'participant' => $participant,
+                    'prix' => 8.5 * $reservation->getNbEmplacements()
+
+                )))
             ;
+
+            echo $message->getBody();
+            exit();
             $this->mailer->send($message);
         }
 

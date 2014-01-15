@@ -69,6 +69,11 @@ class Reservation
         $this->emplacements = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function getIdentifiant()
+    {
+        return 'RES-' . $this->getId() . '-' . substr($this->getParticipant()->getPrenom(), 0, 3);
+    }
+
     /**
      * Get id
      *
