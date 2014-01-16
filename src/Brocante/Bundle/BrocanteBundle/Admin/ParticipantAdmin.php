@@ -87,7 +87,7 @@ class ParticipantAdmin extends Admin
                 ->setContentType("text/html")
                 ->setCharset('utf-8')
                 ->setSubject('Brocante Heusy: confirmation de réservation')
-                ->setFrom('brocante@heusy.org')
+                ->setFrom('brocanteheusy2014@gmail.com')
                 ->setTo( $participant->getEmail() )
 
                 ->setBody($this->template->renderResponse('BrocanteBrocanteBundle:Reservation:mail_confirmation.html.twig', array(
