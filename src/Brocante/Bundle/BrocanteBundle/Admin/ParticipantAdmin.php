@@ -22,8 +22,9 @@ class ParticipantAdmin extends Admin
         $formMapper
             ->add('prenom')
             ->add('nom')
-            ->add('email')
+            ->add('email', 'email', array('required' => false) )
             ->add('telephone', null, array('required' => false))
+            ->add('adresse', null, array('required' => false))
             ->with('Reservation')
                 ->add('reservation', 'sonata_type_admin', array('delete' => true))
             ->end()
@@ -72,7 +73,6 @@ class ParticipantAdmin extends Admin
         $emplacements = $reservation->getEmplacements();
         foreach ( $emplacements as $emplacement ) {
             $emplacement->setReservation($reservation);
-            $reservation->addEmplacement($emplacement);
         }
     }
 
@@ -80,10 +80,7 @@ class ParticipantAdmin extends Admin
     {
         $reservation = $participant->getReservation();
 
-        echo $participant->getEmail();
-        
-
-        if ( !is_null($reservation) )
+        if ( !is_null($reservation) && !is_null($participant->getEmail()) )
         {
 
             $message = \Swift_Message::newInstance()
@@ -116,7 +113,6 @@ class ParticipantAdmin extends Admin
         $emplacements = $reservation->getEmplacements();
         foreach ( $emplacements as $emplacement ) {
             $emplacement->setReservation($reservation);
-            $reservation->addEmplacement($emplacement);
         }
     }
 

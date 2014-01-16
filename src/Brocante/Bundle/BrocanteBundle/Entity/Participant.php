@@ -43,9 +43,16 @@ class Participant
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     */
+    private $adresse;
 
     /**
      * @var string
@@ -225,5 +232,28 @@ class Participant
     public function getReservation()
     {
         return $this->reservation;
+    }
+
+    /**
+     * Set adresse
+     *
+     * @param string $adresse
+     * @return Participant
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Get adresse
+     *
+     * @return string 
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
     }
 }
