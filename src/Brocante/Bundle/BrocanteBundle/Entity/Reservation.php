@@ -54,6 +54,8 @@ class Reservation
      */
     private $paye;
 
+    private $identifiant;
+
     /**
      * @var boolean
      *

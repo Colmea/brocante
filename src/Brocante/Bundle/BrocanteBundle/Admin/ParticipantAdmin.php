@@ -38,6 +38,7 @@ class ParticipantAdmin extends Admin
             ->add('prenom')
             ->add('nom')
             ->add('email')
+            ->add('reservation.id', 'doctrine_orm_number', array('label' => 'n° réservation'))
             ->add('reservation.paye', null, array('label' => 'Payé ?'))
         ;
     }
@@ -46,6 +47,8 @@ class ParticipantAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('reservation.id', null, array('label' => 'n°'))
+            ->add('reservation.identifiant', null, array('label' => 'Identifiant'))
             ->addIdentifier('prenom')
             ->add('nom')
             ->add('email')
