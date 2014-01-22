@@ -1,0 +1,42 @@
+<p>Chère Madame, cher Monsieur,</p>
+
+<p>
+Nous vous confirmons la réception de votre paiement pour la réservation "<b>{{ participant.reservation.identifiant }}</b>" pour la Brocante d'Heusy 2014.<br />
+</p>
+
+<p>
+Récapitulatif de votre réservation:<br />
+---------------------------------------<br />
+<b>Participant:</b> {{ participant }}<br />
+<b>Nombre d'emplacements:</b> {{ participant.reservation.nbEmplacements }}<br />
+<b>Emplacements:</b><br />
+{% for emplacement in participant.reservation.emplacements %}
+ &nbsp;&nbsp;&nbsp;&nbsp; - [Zone {{ emplacement.zone }}] {{ emplacement.numero }}<br />
+{% endfor %}
+---------------------------------------
+</p>
+
+<p>
+Si vous constatez une erreur dans votre réservation, nous vous invitons à vous manifester au plus vite (brocanteheusy2014@gmail.com).<br />
+Vous recevrez, quelques semaines avant l'évènement, toutes les informations pratiques concernant la brocante 2014 (lieu et heure d'arrivée, agenda, ...).
+</p>
+
+<p>
+Nous tenons à vous remercier pour la confiance que vous nous accordez et vous souhaitons dores et déjà une très bonne vente !
+</p>
+
+<p>
+Ci-joint, vous trouverez le règlement 2014
+</p>
+
+<p>
+Rendez-vous le 8 juin !<br />
+Bien à vous,<br />
+Les organisateurs de la brocante de Heusy<br />
+0494/65.55.33 (seulement pendant les heures d'ouverture de la ligne, le samedi et dimanche, de 14h à 17h)<br />
+brocanteheusy2014@gmail.com<br />
+Avenue des Grands Champs, 25<br />
+4802 - HEUSY
+</p>
+
+<p><i>Ceci est un mail automatique</i></p>

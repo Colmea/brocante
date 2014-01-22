@@ -7,6 +7,14 @@ services:
         class: Brocante\Bundle\BrocanteBundle\Listener\ReservationSendMailListener
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+    reservation.confirmpayment.listener:
+        class: Brocante\Bundle\BrocanteBundle\Listener\ConfirmPaymentSendMailListener
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
+        arguments: ['%kernel.root_dir%']
+        calls:
+            - [ setMailer, [@mailer] ]
+            - [ setTemplate, [@templating]]
 
     # Admin services
     sonata.admin.participant:
