@@ -55,7 +55,22 @@ class ParticipantAdmin extends Admin
             ->add('reservation.nbEmplacements', null, array('label' => 'Nbr emplacements'))
             ->add('reservation.emplacements', null, array('label' => 'Emplacements choisis'))
             ->add('reservation.paye', null, array('label' => 'A payé ?'))
+            
         ;
+    }
+
+    public function getBatchActions()
+    {
+        // retrieve the default batch actions (currently only delete)
+        $actions = parent::getBatchActions();
+
+
+        $actions['paye'] = array(
+            'label' => $this->trans('Confirmer la réception du paiement'),
+            'ask_confirmation' => true
+        );
+
+        return $actions;
     }
 
     public function setMailer(\Swift_Mailer $mailer)

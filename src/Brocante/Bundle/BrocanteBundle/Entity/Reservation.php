@@ -76,6 +76,11 @@ class Reservation
         return 'RES-' . $this->getId() . '-' . substr($this->getParticipant()->getPrenom(), 0, 3);
     }
 
+    public function confirmPayment()
+    {
+        $this->setPaye( true );
+    }
+
     /**
      * Get id
      *

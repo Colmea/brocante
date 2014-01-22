@@ -16,7 +16,7 @@ services:
         arguments:
             - ~
             - Brocante\Bundle\BrocanteBundle\Entity\Participant
-            - ~
+            - 'BrocanteBrocanteBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AcmeDemoBundle]]
             - [ setMailer, [@mailer] ]
