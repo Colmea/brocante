@@ -71,9 +71,20 @@ class Reservation
         $this->emplacements = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getIdentifiant();
+    }
+
     public function getIdentifiant()
     {
-        return 'RES-' . $this->getId() . '-' . substr($this->getParticipant()->getPrenom(), 0, 3);
+        $identifiant =  'RES-' . $this->getId() . '-';
+
+        if (null != $this->getParticipant()) {
+            $identifiant .= substr($this->getParticipant()->getPrenom(), 0, 3);
+        }
+
+        return $identifiant;
     }
 
     public function confirmPayment()
