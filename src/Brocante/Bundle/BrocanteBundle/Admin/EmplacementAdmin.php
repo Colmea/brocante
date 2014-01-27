@@ -26,6 +26,17 @@ class EmplacementAdmin extends Admin
             ->add('zone')
             ->add('numero')
             ->add('surface')
+            ->add('free', 'doctrine_orm_callback', array(
+                'label' => 'Libre ?',
+                'callback'   => array($this, 'getFreeFilter'),
+                'field_type' => 'checkbox'
+                ), 'choice', array(
+                    'choices' => array(
+                        true => 'Oui',
+                        false => 'Non',
+                        )
+                )
+            );
         ;
     }
 
@@ -36,9 +47,26 @@ class EmplacementAdmin extends Admin
             ->add('zone')
             ->addIdentifier('numero')
             ->add('remarque')
-            ->add('surface')  
-            ->add('isFree', 'boolean', array('label' => 'Libre ?'))
-
+            ->add('surface')
+            ->add('reservation') 
         ;
+    }
+
+    public function getFreeFilter($queryBuilder, $alias, $field, $value)
+    {
+        if (null === $value['value']) {
+            return;
+        }
+
+        // If filter only free
+        if ($value['value']) {
+            $queryBuilder->andWhere(sprintf('%s.reservation is NULL', $alias));
+        }
+        else {
+            $queryBuilder->andWhere(sprintf('%s.reservation is not NULL', $alias));
+        }
+
+
+        return true;
     }
 }
