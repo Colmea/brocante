@@ -16,13 +16,15 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Brocante\Bundle\BrocanteBundle\BrocanteBrocanteBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\jQueryBundle\SonatajQueryBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
+            new Brocante\Bundle\BrocanteBundle\BrocanteBrocanteBundle(),
+            new Brocante\Bundle\UserBundle\BrocanteUserBundle(),
             /*new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),*/
         );
 
