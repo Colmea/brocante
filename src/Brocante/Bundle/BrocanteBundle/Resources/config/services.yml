@@ -11,10 +11,9 @@ services:
         class: Brocante\Bundle\BrocanteBundle\Listener\ConfirmPaymentSendMailListener
         tags:
             - { name: doctrine.event_listener, event: preUpdate }
-        arguments: ['%kernel.root_dir%']
+        arguments: ['@service_container', '%kernel.root_dir%']
         calls:
             - [ setMailer, [@mailer] ]
-            - [ setTemplate, [@templating]]
 
     # Admin services
     sonata.admin.participant:

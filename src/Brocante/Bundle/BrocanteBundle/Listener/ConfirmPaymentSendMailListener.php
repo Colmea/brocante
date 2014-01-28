@@ -2,7 +2,7 @@
 namespace Brocante\Bundle\BrocanteBundle\Listener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Brocante\Bundle\BrocanteBundle\Entity\Reservation;
 
 class ConfirmPaymentSendMailListener
@@ -18,8 +18,9 @@ class ConfirmPaymentSendMailListener
     /** @var string $webRoot */
     protected $webRoot;
 
-    public function __construct( $rootDir )
+    public function __construct(ContainerInterface $container, $rootDir )
     {
+        $this->container = $container;
         $this->webRoot = realpath($rootDir . '/../web');
     }
 
@@ -39,6 +40,8 @@ class ConfirmPaymentSendMailListener
                 )
             {
                 
+                $templating = $this->container->get('templating');
+
                 // Crée mail de confirmation
                 $message = \Swift_Message::newInstance()
                     ->setContentType("text/html")
@@ -47,7 +50,8 @@ class ConfirmPaymentSendMailListener
                     ->setFrom('brocanteheusy2014@gmail.com')
                     ->setTo( $reservation->getParticipant()->getEmail() )
 
-                    ->setBody($this->template->renderResponse('BrocanteBrocanteBundle:Reservation:mail_confirmation_paiement.html.twig', array(
+
+                    ->setBody($templating->renderResponse('BrocanteBrocanteBundle:Reservation:mail_confirmation_paiement.html.twig', array(
                         'participant' => $reservation->getParticipant(),
                         'prix' => 8.5 * $reservation->getNbEmplacements()
 
@@ -67,11 +71,6 @@ class ConfirmPaymentSendMailListener
     public function setMailer(\Swift_Mailer $mailer)
     {
         $this->mailer = $mailer;
-    }
-
-    public function setTemplate($templating)
-    {
-        $this->template = $templating;
     }
 
 }
