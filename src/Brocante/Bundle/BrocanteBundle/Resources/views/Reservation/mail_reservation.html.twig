@@ -1,0 +1,42 @@
+<p>Chère Madame, cher Monsieur,</p>
+
+<p>
+Voici votre mail de réservation pour la réservation "{{ reservation.identifiant }}" pour la Brocante d'Heusy 2014.<br />
+<strong>Veuillez présenter ce mail lors de votre arrivée sur la brocante</strong>.
+</p>
+
+<p>
+Votre réservation:<br />
+---------------------------------------<br />
+<b>Participant:</b> {{ participant }}<br />
+<b>Emplacements:</b><br />
+<div style="font-size: 1.3em">
+	{% for emplacement in participant.reservation.emplacements %}
+		&nbsp;&nbsp;[Zone {{ emplacement.zone }}]{{ emplacement.numero }}
+	{% endfor %}
+</div>
+---------------------------------------
+</p>
+
+<p>
+	Le jour J, vous devrez vous présenter, <em>entre 4h30 et 8h00</em> à l'entrée:<br />
+	<span style="font-size: 2em">
+		<strong>Entrée {% reservation.entrance %}</strong>
+	</span><br />
+	(voir plan d'accès en pièce jointe. Des panneaux d'indications seront aussi placés autour de la brocante pour vous aider).
+</p>
+
+<p>
+<strong>Note:</strong> Vous devez vos présenter à votre entrée entre 4h30 et 8h00. Après cette heure, toutes les voitures devront avoir quitté le parking.
+</p>
+
+<p>
+Bien à vous,<br />
+Les organisateurs de la brocante de Heusy<br />
+0494/65.55.33 (seulement pendant les heures d'ouverture de la ligne, le dimanche, de 14h à 17h)<br />
+brocanteheusy2014@gmail.com<br />
+Avenue des Grands Champs, 25<br />
+4802 - HEUSY
+</p>
+
+<p><i>Ceci est un mail automatique</i></p>

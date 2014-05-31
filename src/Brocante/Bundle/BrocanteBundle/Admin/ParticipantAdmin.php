@@ -64,9 +64,15 @@ class ParticipantAdmin extends Admin
         // retrieve the default batch actions (currently only delete)
         $actions = parent::getBatchActions();
 
-
+        // Confirm payment action
         $actions['paye'] = array(
             'label' => $this->trans('Confirmer la réception du paiement'),
+            'ask_confirmation' => true
+        );
+
+        // Send reservation mail action
+        $actions['sendReservationMail'] = array(
+            'label' => $this->trans('Envoyer le mail de réservation'),
             'ask_confirmation' => true
         );
 

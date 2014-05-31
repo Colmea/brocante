@@ -92,6 +92,30 @@ class Reservation
         $this->setPaye( true );
     }
 
+    public function getEntrance()
+    {
+        $firstEmplacement = $this->getEmplacements()->first();
+
+        if (!firstEmplacement) {
+            return 1;
+        }
+
+        $zone = $firstEmplacement->getZone()->getName();
+
+        if ("A" == $zone || "B" == $zone || "C" == $zone) {
+            return 1;
+        }
+        elseif ("D" == $zone || "E" == $zone || "F" == $zone) {
+            return 2;
+        }
+        elseif ("X" == $zone || "Y" == $zone || "Z" == $zone) {
+            return 3;
+        }
+        else {
+            return 1;
+        }
+    }
+
     /**
      * Get id
      *
