@@ -91,7 +91,7 @@ class CRUDController extends SonataCRUDController
                     ->setContentType("text/html")
                     ->setCharset('utf-8')
                     ->setSubject('Brocante Heusy: Votre réservation (important !)')
-                    ->setFrom('brocante@heusy.org')
+                    ->setFrom('brocanteheusy2014@gmail.com')
                     ->setTo($participant->getEmail())
                     ->setBody($templating->renderResponse('BrocanteBrocanteBundle:Reservation:mail_reservation.html.twig', array(
                         'reservation' => $participant->getReservation(),
