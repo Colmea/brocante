@@ -8,10 +8,10 @@ Voici votre mail de réservation pour la réservation "{{ reservation.identifian
 <p>
 Votre réservation:<br />
 ---------------------------------------<br />
-<b>Participant:</b> {{ participant }}<br />
+<b>Participant:</b> {{ reservation.participant }}<br />
 <b>Emplacements:</b><br />
 <div style="font-size: 1.3em">
-	{% for emplacement in participant.reservation.emplacements %}
+	{% for emplacement in reservation.emplacements %}
 		&nbsp;&nbsp;[Zone {{ emplacement.zone }}]{{ emplacement.numero }}
 	{% endfor %}
 </div>
@@ -27,7 +27,8 @@ Votre réservation:<br />
 </p>
 
 <p>
-<strong>Note:</strong> Vous devez vos présenter à votre entrée entre 4h30 et 8h00. Après cette heure, toutes les voitures devront avoir quitté le parking.
+<strong>Note:</strong> Vous devez vos présenter à votre entrée entre 4h30 et 8h00. Après cette heure, toutes les voitures devront avoir quitté le parking.<br />
+Une question ? Contactez-nous à l'adresse brocanteheusy2014@gmail.com
 </p>
 
 <p>

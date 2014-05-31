@@ -74,8 +74,13 @@ class CRUDController extends SonataCRUDController
 		    {
 		    	$participant = $em->getRepository('BrocanteBrocanteBundle:Participant')->find( $idParticipant );
 		    	
-		    	// Si réservation présente
+		    	// Si aucune réservation, pas d'envoi de mail
 		    	if (is_null($participant->getReservation())) {
+		    		continue;
+		    	}
+
+		    	// Si aucun emplacement, pas d'envoi de mail
+		    	if (count($participant->getReservation()->getEmplacements()) < 1) {
 		    		continue;
 		    	}
 
