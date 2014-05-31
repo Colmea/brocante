@@ -96,7 +96,8 @@ class CRUDController extends SonataCRUDController
 
                 // Attache le règlement et le plan d'accès
                 $message->attach(\Swift_Attachment::fromPath($this->webRoot . '/documentation/Reglement_brocante_heusy_2014.pdf' ));
-				
+				$message->attach(\Swift_Attachment::fromPath($this->webRoot . '/documentation/Plan_access_brocante_heusy_2014.pdf' ));
+
                 $this->get('mailer')->send($message);
 		    }
 
@@ -110,7 +111,7 @@ class CRUDController extends SonataCRUDController
     	}
 
     	if ( $nbParticipants > 1 )
-    		$message = "<strong>{$nbParticipants}</strong> emails de réservation envoyés !";
+    		$message = "<strong>{$nbParticipants}</strong> emails de réservation envoyés";
     	else
     		$message = "<strong>1</strong> email de réservation a bien été envoyé.";
 
