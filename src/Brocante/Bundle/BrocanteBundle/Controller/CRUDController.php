@@ -92,26 +92,21 @@ class CRUDController extends SonataCRUDController
                     ->setCharset('utf-8')
                     ->setSubject('Brocante Heusy: Votre réservation (important !)')
                     ->setFrom('brocante@heusy.org')
-                    ->setTo( $participant->getEmail() )
-
-
+                    ->setTo($participant->getEmail())
                     ->setBody($templating->renderResponse('BrocanteBrocanteBundle:Reservation:mail_reservation.html.twig', array(
                         'reservation' => $participant->getReservation(),
                     )));
 
                 // Attache le règlement et le plan d'accès
-                $message->attach(\Swift_Attachment::fromPath($this->getRequest()->getBasePath() . '/documentation/Reglement_brocante_heusy_2014.pdf' ));
-				$message->attach(\Swift_Attachment::fromPath($this->getRequest()->getBasePath() . '/documentation/Plan_access_brocante_heusy_2014.pdf' ));
+                $message->attach(\Swift_Attachment::fromPath($this->get('kernel')->getRootDir() . '/../web/documentation/Reglement_brocante_heusy_2014.pdf' ));
+				$message->attach(\Swift_Attachment::fromPath($this->get('kernel')->getRootDir() . '/../web/documentation/Plan_access_brocante_heusy_2014.pdf' ));
 
-                $this->get('mailer')->send($message);
+                $this->get('swiftmailer.mailer.default')->send($message);
 		    }
 
 		} catch (\Exception $e) {
-			echo '<pre>';
-			var_dump($e->getMessage());
-			exit();
 			// Si exception durant transaction
-	        $this->addFlash('sonata_flash_error', "Erreur lors de l'envoi du mail de réservation. Veuillez réessayer. Erreur: " + $e);
+	        $this->addFlash('sonata_flash_error', "Erreur lors de l'envoi du mail de réservation. Veuillez réessayer.");
 
 	        return new RedirectResponse(
 	          $this->admin->generateUrl('list',$this->admin->getFilterParameters())
