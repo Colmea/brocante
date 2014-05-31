@@ -96,11 +96,11 @@ class Reservation
     {
         $firstEmplacement = $this->getEmplacements()->first();
 
-        if (!firstEmplacement) {
+        if (!$firstEmplacement) {
             return 1;
         }
 
-        $zone = $firstEmplacement->getZone()->getName();
+        $zone = $firstEmplacement->getZone()->getNom();
 
         if ("A" == $zone || "B" == $zone || "C" == $zone) {
             return 1;

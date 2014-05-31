@@ -12,7 +12,7 @@ Votre réservation:<br />
 <b>Emplacements:</b><br />
 <div style="font-size: 1.3em">
 	{% for emplacement in reservation.emplacements %}
-		&nbsp;&nbsp;[Zone {{ emplacement.zone }}]{{ emplacement.numero }}
+		&nbsp;&nbsp;[{{ emplacement.zone }}]{{ emplacement.numero }}
 	{% endfor %}
 </div>
 ---------------------------------------
@@ -21,7 +21,7 @@ Votre réservation:<br />
 <p>
 	Le jour J, vous devrez vous présenter, <em>entre 4h30 et 8h00</em> à l'entrée:<br />
 	<span style="font-size: 2em">
-		<strong>Entrée {% reservation.entrance %}</strong>
+		<strong>Entrée {{ reservation.entrance }}</strong>
 	</span><br />
 	(voir plan d'accès en pièce jointe. Des panneaux d'indications seront aussi placés autour de la brocante pour vous aider).
 </p>
